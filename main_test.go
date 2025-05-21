@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 )
@@ -8,8 +9,8 @@ import (
 func TestGetClientIP(t *testing.T) {
 	tests := []struct {
 		xForwardedFor string
-		remoteAddr   string
-		want         string
+		remoteAddr    string
+		want          string
 	}{
 		{
 			"",
@@ -58,6 +59,33 @@ func TestGetClientIP(t *testing.T) {
 		r.Header.Set("X-Forwarded-For", tt.xForwardedFor)
 		if got := getClientIP(r); got != tt.want {
 			t.Errorf("getClientIP() = %q, want: %q", got, tt.want)
+		}
+	}
+}
+
+func TestRelayCheck(t *testing.T) {
+	tests := []struct {
+		ip   string
+		want bool
+	}{
+		{
+			"1.2.3.4",
+			false,
+		},
+		{
+			"104.28.62.58",
+			true,
+		},
+	}
+	for _, tt := range tests {
+		req := httptest.NewRequest("GET", "/", nil)
+		req.Header.Set("X-Forwarded-For", tt.ip)
+		rr := httptest.NewRecorder()
+		relayCheck(rr, req)
+		var resp response
+		json.NewDecoder(rr.Body).Decode(&resp)
+		if resp.Relay != tt.want {
+			t.Errorf("Relay = %v, want: %v", resp.Relay, tt.want)
 		}
 	}
 }
