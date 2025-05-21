@@ -3,6 +3,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"log"
 	"net"
 	"net/http"
@@ -16,8 +17,10 @@ func init() {
 }
 
 func main() {
+	addr := flag.String("addr", ":8080", "Address to listen to.")
+	flag.Parse()
 	http.HandleFunc("/", relayCheck)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(*addr, nil))
 }
 
 // relayCheck handles the actual requests.

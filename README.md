@@ -11,7 +11,8 @@ A lightweight HTTP API to check if the client uses
 
 ## Usage
 
-Run `./relaycheck` to start the HTTP server, which will listen on "8080/tcp".
+Run `./relaycheck` to start the HTTP server, which will listen on ":8080" by
+default (can be overwritten with `--addr`).
 It will check the address from the HTTP header "X-Forwarded-For" to get the
 original client address if behind a reverse proxy.
 Otherwise the regular client address will be tested.
