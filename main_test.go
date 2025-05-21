@@ -84,6 +84,9 @@ func TestRelayCheck(t *testing.T) {
 		relayCheck(rr, req)
 		var resp response
 		json.NewDecoder(rr.Body).Decode(&resp)
+		if got, want := rr.Header().Get("Content-Type"), "application/json"; got != want {
+			t.Fatalf("Content-Type = %q, want: %q", got, want)
+		}
 		if resp.Relay != tt.want {
 			t.Errorf("Relay = %v, want: %v", resp.Relay, tt.want)
 		}
