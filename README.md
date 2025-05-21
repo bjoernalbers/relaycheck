@@ -5,9 +5,13 @@ A lightweight HTTP API to check if the client uses
 
 ## Installation
 
+Either download the
+[latest release](https://github.com/bjoernalbers/relaycheck/releases/latest)
+or built relaycheck from source:
+
 - install go
-- clone this repository
-- build the `relaycheck` binary via `go build`
+- clone this repository and `cd` into it
+- build `relaycheck` binary via `go build`
 
 ## Usage
 
