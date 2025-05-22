@@ -4,8 +4,8 @@
 feature by Apple that hides a user's IP address by routing Safari web traffic
 through [relay servers](https://mask-api.icloud.com/egress-ip-ranges.csv).
 
-relaycheck lets you detect whether a client is using iCloud Private Relay by
-providing a simple HTTP API with a clear JSON response.
+relaycheck lets you detect whether a client is using a iCloud Private Relay
+address by providing a simple HTTP API with a clear JSON response.
 
 ```json
 { "relay": true }
