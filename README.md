@@ -1,7 +1,18 @@
 # relaycheck - Simple HTTP API to detect iCloud Private Relay clients
 
-A lightweight HTTP API to check if the client uses
-[iCloud Private Relay](https://support.apple.com/en-us/102602).
+[iCloud Private Relay](https://support.apple.com/en-us/102602) is a privacy
+feature by Apple that hides a user's IP address by routing Safari web traffic
+through [relay servers](https://mask-api.icloud.com/egress-ip-ranges.csv).
+
+relaycheck lets you detect whether a client is using iCloud Private Relay by
+providing a simple HTTP API with a clear JSON response.
+
+```json
+{ "relay": true }
+```
+
+Designed for developers and end users alike, relaycheck can be used in websites
+to let users verify if iCloud Private Relay is working as expected.
 
 ## Installation
 
