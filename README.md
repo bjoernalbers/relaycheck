@@ -30,7 +30,7 @@ Or built `relaycheck` from source:
 ## Usage
 
 Run `./relaycheck` to start the HTTP server, which will listen on ":8080" by
-default (can be overwritten with `--addr`).
+default (can be overwritten with `-addr` option).
 
 Response without iCloud Private Relay:
 
