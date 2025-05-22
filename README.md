@@ -2,17 +2,18 @@
 
 [iCloud Private Relay](https://support.apple.com/en-us/102602) is a privacy
 feature by Apple that hides a user's IP address by routing Safari web traffic
-through [relay servers](https://mask-api.icloud.com/egress-ip-ranges.csv).
+through relay servers.
 
-relaycheck detects whether a client is using an iCloud Private Relay address by
-providing a simple HTTP API with a minimal JSON response:
+relaycheck detects whether a client is using an
+[iCloud Private Relay address](https://mask-api.icloud.com/egress-ip-ranges.csv)
+and returns the result in a minimal JSON response:
 
 ```json
 { "relay": true, "ip": "172.225.6.92" }
 ```
 
 It can be used in websites to let users
-[verify if iCloud Private Relay is working as expected](https://www.bjoernalbers.de/tools/icloud-privat-relay-test/).
+[verify if iCloud Private Relay is working as expected](https://www.bjoernalbers.de/icloud-privat-relay-test/).
 
 When deployed behind a reverse proxy, relaycheck evaluates the
 `X-Forwarded-For` header to extract the original client IP.
