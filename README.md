@@ -1,4 +1,4 @@
-# relaycheck
+# relaycheck - Simple HTTP API to detect iCloud Private Relay clients
 
 A lightweight HTTP API to check if the client uses
 [iCloud Private Relay](https://support.apple.com/en-us/102602).
