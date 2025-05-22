@@ -21,13 +21,12 @@ var version = "unset"
 func init() {
 	log.SetFlags(0)
 	flag.Usage = Usage
-	// Fetch relay list on start to warm up the cache.
-	isRelay(aRelayIP)
 }
 
 func main() {
 	addr := flag.String("addr", ":8080", "Address to listen to.")
 	flag.Parse()
+	warmUpCache()
 	http.HandleFunc("/", relayCheck)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
@@ -41,6 +40,11 @@ Usage: relaycheck [options]
 Options:`, version)
 	fmt.Fprintln(flag.CommandLine.Output(), header)
 	flag.PrintDefaults()
+}
+
+// warmUpCache performs a sample query to fetch the relay list from Apple.
+func warmUpCache() {
+	isRelay(aRelayIP)
 }
 
 // relayCheck handles the actual requests.
