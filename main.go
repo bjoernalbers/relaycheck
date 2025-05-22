@@ -12,8 +12,12 @@ import (
 	"github.com/kmikiy/go-icloud-private-relay/relay"
 )
 
+const aRelayIP = "172.225.6.92"
+
 func init() {
 	log.SetFlags(0)
+	// Fetch relay list on start to warm up the cache.
+	isRelay(aRelayIP)
 }
 
 func main() {

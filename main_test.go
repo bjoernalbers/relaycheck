@@ -73,7 +73,7 @@ func TestRelayCheck(t *testing.T) {
 			false,
 		},
 		{
-			"104.28.62.58",
+			aRelayIP,
 			true,
 		},
 	}
