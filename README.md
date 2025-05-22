@@ -8,7 +8,7 @@ relaycheck detects whether a client is using an iCloud Private Relay address by
 providing a simple HTTP API with a minimal JSON response:
 
 ```json
-{ "relay": true }
+{ "relay": true, "ip": "172.225.6.92" }
 ```
 
 It can be used in websites to let users
@@ -34,12 +34,16 @@ Or built `relaycheck` from source:
 Run `./relaycheck` to start the HTTP server, which will listen on ":8080" by
 default (can be overwritten with `-addr` option).
 
-Response without iCloud Private Relay:
+Response for a regular (non-relay) address:
 
-    $ curl localhost:8080
-    {"relay":false}
+```
+$ curl -H "X-Forwarded-For: 1.1.1.1" localhost:8080
+{"relay":false,"ip":"1.1.1.1"}
+```
 
-Response with an iCloud Private Relay address:
+Response for an iCloud Private Relay address:
 
-    $ curl -H "X-Forwarded-For: 140.248.36.60" localhost:8080
-    {"relay":true}
+```
+$ curl -H "X-Forwarded-For: 172.225.6.92" localhost:8080
+{"relay":true,"ip":"172.225.6.92"}
+```

@@ -90,5 +90,8 @@ func TestRelayCheck(t *testing.T) {
 		if resp.Relay != tt.want {
 			t.Errorf("Relay = %v, want: %v", resp.Relay, tt.want)
 		}
+		if resp.IP != tt.ip {
+			t.Errorf("IP = %v, want: %v", resp.IP, tt.ip)
+		}
 	}
 }

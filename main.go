@@ -25,15 +25,18 @@ func main() {
 
 // relayCheck handles the actual requests.
 func relayCheck(w http.ResponseWriter, req *http.Request) {
-	var resp response
-	resp.Relay = relay.IsICloudPrivateRelayAddress(getClientIP(req))
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(resp)
+	ip := getClientIP(req)
+	json.NewEncoder(w).Encode(&response{
+		Relay: relay.IsICloudPrivateRelayAddress(ip),
+		IP:    ip,
+	})
 }
 
 // response is returned to the client.
 type response struct {
-	Relay bool `json:"relay"`
+	Relay bool   `json:"relay"`
+	IP    string `json:"ip"`
 }
 
 // getClientIP returns the client IP address from the HTTP request.
