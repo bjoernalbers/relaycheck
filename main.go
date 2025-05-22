@@ -4,6 +4,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -14,8 +15,12 @@ import (
 
 const aRelayIP = "172.225.6.92"
 
+// version gets set via ldflags
+var version = "unset"
+
 func init() {
 	log.SetFlags(0)
+	flag.Usage = Usage
 	// Fetch relay list on start to warm up the cache.
 	isRelay(aRelayIP)
 }
@@ -25,6 +30,17 @@ func main() {
 	flag.Parse()
 	http.HandleFunc("/", relayCheck)
 	log.Fatal(http.ListenAndServe(*addr, nil))
+}
+
+// Usage prints usage instructions.
+func Usage() {
+	header := fmt.Sprintf(`relaycheck - Simple HTTP API to detect iCloud Private Relay clients (version: %s)
+
+Usage: relaycheck [options]
+
+Options:`, version)
+	fmt.Fprintln(flag.CommandLine.Output(), header)
+	flag.PrintDefaults()
 }
 
 // relayCheck handles the actual requests.
