@@ -4,16 +4,18 @@
 feature by Apple that hides a user's IP address by routing Safari web traffic
 through [relay servers](https://mask-api.icloud.com/egress-ip-ranges.csv).
 
-relaycheck lets you detect whether a client is using a iCloud Private Relay
-address by providing a simple HTTP API with a clear JSON response.
+relaycheck detects whether a client is using an iCloud Private Relay address by
+providing a simple HTTP API with a minimal JSON response:
 
 ```json
 { "relay": true }
 ```
 
-Designed for developers and end users alike, relaycheck can be used in websites
-to let users
+It can be used in websites to let users
 [verify if iCloud Private Relay is working as expected](https://www.bjoernalbers.de/tools/icloud-privat-relay-test/).
+
+When deployed behind a reverse proxy, relaycheck evaluates the
+`X-Forwarded-For` header to extract the original client IP.
 
 ## Installation
 
@@ -29,9 +31,6 @@ or built relaycheck from source:
 
 Run `./relaycheck` to start the HTTP server, which will listen on ":8080" by
 default (can be overwritten with `--addr`).
-It will check the address from the HTTP header "X-Forwarded-For" to get the
-original client address if behind a reverse proxy.
-Otherwise the regular client address will be tested.
 
 Response without iCloud Private Relay:
 
