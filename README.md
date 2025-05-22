@@ -12,7 +12,8 @@ address by providing a simple HTTP API with a clear JSON response.
 ```
 
 Designed for developers and end users alike, relaycheck can be used in websites
-to let users verify if iCloud Private Relay is working as expected.
+to let users
+[verify if iCloud Private Relay is working as expected](https://www.bjoernalbers.de/tools/icloud-privat-relay-test/).
 
 ## Installation
 
