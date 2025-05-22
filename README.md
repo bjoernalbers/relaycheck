@@ -25,7 +25,7 @@ Or built `relaycheck` from source:
 
 - install Go, i.e. by using [Homebrew](https://brew.sh) on a Mac: `brew install go`
 - clone this repository and `cd` into it
-- build `relaycheck` binary via `go build`
+- build `relaycheck` binary via `make`
 
 ## Usage
 
