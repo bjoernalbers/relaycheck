@@ -19,11 +19,11 @@ When deployed behind a reverse proxy, relaycheck evaluates the
 
 ## Installation
 
-Either download the
-[latest release](https://github.com/bjoernalbers/relaycheck/releases/latest)
-or built relaycheck from source:
+Just download the
+[latest release](https://github.com/bjoernalbers/relaycheck/releases/latest).
+Or built `relaycheck` from source:
 
-- install go
+- install Go, i.e. by using [Homebrew](https://brew.sh) on a Mac: `brew install go`
 - clone this repository and `cd` into it
 - build `relaycheck` binary via `go build`
 
