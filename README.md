@@ -22,6 +22,11 @@ When deployed behind a reverse proxy, relaycheck evaluates the
 Just download the
 [latest release](https://github.com/bjoernalbers/relaycheck/releases/latest)
 and make it executable with `chmod +x relaycheck`.
+Mac users will have to remote the quarantine attribute as well:
+
+```
+$ xattr -r -d com.apple.quarantine ~/Downloads/relaycheck-darwin-arm64
+```
 
 Or built `relaycheck` from source:
 
