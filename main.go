@@ -1,4 +1,3 @@
-// relaycheck
 package main
 
 import (
@@ -15,12 +14,18 @@ import (
 
 const aRelayIP = "172.225.6.92"
 
-// version gets set via ldflags
+// version gets set via ldflags.
 var version = "unset"
+
+// response is returned to the client.
+type response struct {
+	Relay bool   `json:"relay"`
+	IP    string `json:"ip"`
+}
 
 func init() {
 	log.SetFlags(0)
-	flag.Usage = Usage
+	flag.Usage = usage
 }
 
 func main() {
@@ -31,8 +36,8 @@ func main() {
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
 
-// Usage prints usage instructions.
-func Usage() {
+// usage prints usage instructions.
+func usage() {
 	header := fmt.Sprintf(`relaycheck - Simple HTTP API to detect iCloud Private Relay clients (version: %s)
 
 Usage: relaycheck [options]
@@ -47,6 +52,11 @@ func warmUpCache() {
 	isRelay(aRelayIP)
 }
 
+// isRelay returns true if the IP is an iCloud Private Relay, otherwise false.
+func isRelay(ip string) bool {
+	return relay.IsICloudPrivateRelayAddress(ip)
+}
+
 // relayCheck handles the actual requests.
 func relayCheck(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -55,12 +65,6 @@ func relayCheck(w http.ResponseWriter, req *http.Request) {
 		Relay: isRelay(ip),
 		IP:    ip,
 	})
-}
-
-// response is returned to the client.
-type response struct {
-	Relay bool   `json:"relay"`
-	IP    string `json:"ip"`
 }
 
 // getClientIP returns the client IP address from the HTTP request.
@@ -77,9 +81,4 @@ func getClientIP(r *http.Request) string {
 		return ip
 	}
 	return r.RemoteAddr
-}
-
-// isRelay returns true if the IP is an iCloud Private Relay, otherwise false.
-func isRelay(ip string) bool {
-	return relay.IsICloudPrivateRelayAddress(ip)
 }
