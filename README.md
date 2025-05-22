@@ -20,7 +20,8 @@ When deployed behind a reverse proxy, relaycheck evaluates the
 ## Installation
 
 Just download the
-[latest release](https://github.com/bjoernalbers/relaycheck/releases/latest).
+[latest release](https://github.com/bjoernalbers/relaycheck/releases/latest)
+and make it executable: `chmod +x relaycheck`
 Or built `relaycheck` from source:
 
 - install Go, i.e. by using [Homebrew](https://brew.sh) on a Mac: `brew install go`
