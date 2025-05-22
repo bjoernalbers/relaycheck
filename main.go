@@ -28,7 +28,7 @@ func relayCheck(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ip := getClientIP(req)
 	json.NewEncoder(w).Encode(&response{
-		Relay: relay.IsICloudPrivateRelayAddress(ip),
+		Relay: isRelay(ip),
 		IP:    ip,
 	})
 }
@@ -53,4 +53,9 @@ func getClientIP(r *http.Request) string {
 		return ip
 	}
 	return r.RemoteAddr
+}
+
+// isRelay returns true if the IP is an iCloud Private Relay, otherwise false.
+func isRelay(ip string) bool {
+	return relay.IsICloudPrivateRelayAddress(ip)
 }
