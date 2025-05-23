@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http/httptest"
+	"reflect"
 	"testing"
 )
 
@@ -74,7 +75,7 @@ func TestRelayCheck(t *testing.T) {
 		},
 		{
 			aRelayIP,
-			response{Relay: true, IP: aRelayIP},
+			response{Relay: true, IP: aRelayIP, Location: &Location{CountryCode: "DE", RegionCode: "DE-BE", City: "Berlin"}},
 		},
 	}
 	for _, tt := range tests {
@@ -87,7 +88,7 @@ func TestRelayCheck(t *testing.T) {
 		if got, want := rr.Header().Get("Content-Type"), "application/json"; got != want {
 			t.Fatalf("Content-Type = %q, want: %q", got, want)
 		}
-		if got, want := resp, tt.want; got != want {
+		if got, want := resp, tt.want; !reflect.DeepEqual(got, want) {
 			t.Fatalf("Response:\ngot:\t%#v\nwant:\t%#v", got, want)
 		}
 	}

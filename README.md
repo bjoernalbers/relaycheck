@@ -9,7 +9,15 @@ relaycheck detects whether a client is using an
 and returns the result in a minimal JSON response:
 
 ```json
-{ "relay": true, "ip": "172.225.6.92" }
+{
+   "ip" : "172.225.6.92",
+   "location" : {
+      "city" : "Berlin",
+      "country_code" : "DE",
+      "region_code" : "DE-BE"
+   },
+   "relay" : true
+}
 ```
 
 It can be used in websites to let users
@@ -43,13 +51,24 @@ default (can be overwritten with `-addr` option).
 Response for a regular (non-relay) address:
 
 ```
-$ curl -H "X-Forwarded-For: 1.1.1.1" localhost:8080
-{"relay":false,"ip":"1.1.1.1"}
+$ curl -sH "X-Forwarded-For: 1.1.1.1" localhost:8080 | json_pp
+{
+   "ip" : "1.1.1.1",
+   "relay" : false
+}
 ```
 
 Response for an iCloud Private Relay address:
 
 ```
-$ curl -H "X-Forwarded-For: 172.225.6.92" localhost:8080
-{"relay":true,"ip":"172.225.6.92"}
+$ curl -sH "X-Forwarded-For: 172.225.6.92" localhost:8080 | json_pp
+{
+   "ip" : "172.225.6.92",
+   "location" : {
+      "city" : "Berlin",
+      "country_code" : "DE",
+      "region_code" : "DE-BE"
+   },
+   "relay" : true
+}
 ```

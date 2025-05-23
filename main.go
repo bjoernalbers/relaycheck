@@ -19,8 +19,16 @@ var version = "unset"
 
 // response is returned to the client.
 type response struct {
-	Relay bool   `json:"relay"`
-	IP    string `json:"ip"`
+	Relay    bool      `json:"relay"`
+	IP       string    `json:"ip"`
+	Location *Location `json:"location,omitempty"`
+}
+
+// Location represents an iCloud Private Relay location .
+type Location struct {
+	CountryCode string `json:"country_code"`
+	RegionCode  string `json:"region_code"`
+	City        string `json:"city"`
 }
 
 func init() {
@@ -61,10 +69,18 @@ func isRelay(ip string) bool {
 func relayCheck(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ip := getClientIP(req)
-	json.NewEncoder(w).Encode(&response{
+	resp := response{
 		Relay: isRelay(ip),
 		IP:    ip,
-	})
+	}
+	if location, err := relay.ICloudPrivateRelay(ip); err == nil {
+		resp.Location = &Location{
+			CountryCode: location.CountryCode,
+			RegionCode:  location.State,
+			City:        location.City,
+		}
+	}
+	json.NewEncoder(w).Encode(&resp)
 }
 
 // getClientIP returns the client IP address from the HTTP request.
