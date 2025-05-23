@@ -1,6 +1,12 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
-github.com/kmikiy/go-icloud-private-relay v0.0.0-20211201094143-871998bd9426 h1:mZE/78z1bx8AzhgymbtrTKf24iYk9Ruib2qzcqjBBVU=
-github.com/kmikiy/go-icloud-private-relay v0.0.0-20211201094143-871998bd9426/go.mod h1:/YHXToDecD+uC79BJhhHvjgzva/jbbaBd5TJ2ZGnJvg=
 github.com/kmikiy/go-icloud-private-relay v0.0.0-20250522182812-b533e2f5d957 h1:+NH12zpvw4BmaVlZOB+o3Vmn6EysH/txE8CEyyj5tAQ=
 github.com/kmikiy/go-icloud-private-relay v0.0.0-20250522182812-b533e2f5d957/go.mod h1:/YHXToDecD+uC79BJhhHvjgzva/jbbaBd5TJ2ZGnJvg=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
+github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b h1:h8qDotaEPuJATrMmW04NCwg7v22aHH28wwpauUhK9Oo=
+gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
