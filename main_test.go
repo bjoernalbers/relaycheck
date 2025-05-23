@@ -3,8 +3,9 @@ package main
 import (
 	"encoding/json"
 	"net/http/httptest"
-	"reflect"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetClientIP(t *testing.T) {
@@ -88,8 +89,8 @@ func TestRelayCheck(t *testing.T) {
 		if got, want := rr.Header().Get("Content-Type"), "application/json"; got != want {
 			t.Fatalf("Content-Type = %q, want: %q", got, want)
 		}
-		if got, want := resp, tt.want; !reflect.DeepEqual(got, want) {
-			t.Fatalf("Response:\ngot:\t%#v\nwant:\t%#v", got, want)
+		if diff := cmp.Diff(tt.want, resp); diff != "" {
+			t.Errorf("response mismatch (-want +got):\n%s", diff)
 		}
 	}
 }
