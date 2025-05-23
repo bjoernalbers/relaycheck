@@ -75,7 +75,7 @@ func TestRelayCheck(t *testing.T) {
 		},
 		{
 			aRelayIP,
-			response{Relay: true, IP: aRelayIP, Location: &Location{CountryCode: "DE", RegionCode: "DE-BE", City: "Berlin"}},
+			response{Relay: true, IP: aRelayIP, Location: &location{CountryCode: "DE", RegionCode: "DE-BE", City: "Berlin"}},
 		},
 	}
 	for _, tt := range tests {

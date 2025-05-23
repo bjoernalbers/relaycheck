@@ -21,11 +21,11 @@ var version = "unset"
 type response struct {
 	Relay    bool      `json:"relay"`
 	IP       string    `json:"ip"`
-	Location *Location `json:"location,omitempty"`
+	Location *location `json:"location,omitempty"`
 }
 
-// Location represents an iCloud Private Relay location .
-type Location struct {
+// location represents an iCloud Private Relay location .
+type location struct {
 	CountryCode string `json:"country_code"`
 	RegionCode  string `json:"region_code"`
 	City        string `json:"city"`
@@ -73,11 +73,11 @@ func relayCheck(w http.ResponseWriter, req *http.Request) {
 		Relay: isRelay(ip),
 		IP:    ip,
 	}
-	if location, err := relay.ICloudPrivateRelay(ip); err == nil {
-		resp.Location = &Location{
-			CountryCode: location.CountryCode,
-			RegionCode:  location.State,
-			City:        location.City,
+	if l, err := relay.ICloudPrivateRelay(ip); err == nil {
+		resp.Location = &location{
+			CountryCode: l.CountryCode,
+			RegionCode:  l.State,
+			City:        l.City,
 		}
 	}
 	json.NewEncoder(w).Encode(&resp)
