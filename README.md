@@ -39,20 +39,39 @@ When deployed behind a reverse proxy, relaycheck evaluates the
 
 ## Installation
 
+### Download binary
+
 Just download the
 [latest release](https://github.com/bjoernalbers/relaycheck/releases/latest)
-and make it executable with `chmod +x relaycheck`.
-Mac users will have to remote the quarantine attribute as well:
+and make it executable.
+Example for a Mac with Apple Silicon:
 
 ```
-$ xattr -r -d com.apple.quarantine ~/Downloads/relaycheck-darwin-arm64
+curl -LO https://github.com/bjoernalbers/relaycheck/releases/latest/download/relaycheck-darwin-arm64
+chmod +x relaycheck-darwin-arm64
+xattr -r -d com.apple.quarantine relaycheck-darwin-arm64 # remove from quarantine (only required on macOS)
 ```
 
-Or built `relaycheck` from source:
+### Build from source
 
-- install Go, i.e. by using [Homebrew](https://brew.sh) on a Mac: `brew install go`
-- clone this repository and `cd` into it
-- build `relaycheck` binary via `make`
+This requires Go, which can be installed on a Mac by using
+[Homebrew](https://brew.sh): `brew install go`
+
+The steps for building the binary are:
+
+```
+git clone https://github.com/bjoernalbers/relaycheck.git
+cd relaycheck
+make
+```
+
+### Docker
+
+There is a Docker Image as well:
+
+```
+docker run --rm ghcr.io/bjoernalbers/relaycheck
+```
 
 ## Usage
 
