@@ -67,19 +67,19 @@ func isRelay(ip string) bool {
 
 // relayCheck handles the actual requests.
 func relayCheck(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	ip := getClientIP(req)
-	resp := response{
-		Relay: isRelay(ip),
-		IP:    ip,
-	}
-	if l, err := relay.ICloudPrivateRelay(ip); err == nil {
+	resp := response{IP: ip}
+	if loc, err := relay.ICloudPrivateRelay(ip); err != nil {
+		resp.Relay = false
+	} else {
+		resp.Relay = true
 		resp.Location = &location{
-			CountryCode: l.CountryCode,
-			RegionCode:  l.State,
-			City:        l.City,
+			CountryCode: loc.CountryCode,
+			RegionCode:  loc.State,
+			City:        loc.City,
 		}
 	}
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&resp)
 }
 
