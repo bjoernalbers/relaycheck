@@ -17,3 +17,14 @@ archives:
 
 checksum:
     name_template: "{{ .ProjectName }}-checksums.txt"
+
+kos:
+  - repositories: [ghcr.io/bjoernalbers/relaycheck]
+    tags:
+      - "{{.Version}}"
+      - latest
+    bare: true
+    preserve_import_paths: false
+    platforms:
+      - linux/amd64
+      - linux/arm64
