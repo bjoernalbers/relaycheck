@@ -57,12 +57,7 @@ Options:`, version)
 
 // warmUpCache performs a sample query to fetch the relay list from Apple.
 func warmUpCache() {
-	isRelay(aRelayIP)
-}
-
-// isRelay returns true if the IP is an iCloud Private Relay, otherwise false.
-func isRelay(ip string) bool {
-	return relay.IsICloudPrivateRelayAddress(ip)
+	relay.IsICloudPrivateRelayAddress(aRelayIP)
 }
 
 // relayCheck handles the actual requests.
